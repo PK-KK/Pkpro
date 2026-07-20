@@ -1,6 +1,8 @@
-# Core Dependencies
+# Updated requirements with database and JWT support
 Flask==3.0.0
 Flask-CORS==4.0.0
+Flask-SQLAlchemy==3.1.1
+Flask-JWT-Extended==4.5.3
 Python-dotenv==1.0.0
 
 # AI & LLM
@@ -14,6 +16,7 @@ openpyxl==3.11.0
 # Scripting & Automation
 pytest==7.4.3
 requests==2.31.0
+werkzeug==3.0.0
 
 # Logging & Monitoring
 python-logging-loki==0.3.2
@@ -22,6 +25,10 @@ python-logging-loki==0.3.2
 pywin32==306
 netifaces==0.11.0
 scapy==2.5.0
+
+# Database
+PyMySQL==1.1.0
+psycopg2-binary==2.9.9
 
 # Documentation
 Sphinx==7.2.6
@@ -34,3 +41,8 @@ pylint==3.0.3
 
 # Testing
 responses==0.24.1
+coverage==7.3.2
+
+# Utilities
+curl==1.0
+click==8.1.7
