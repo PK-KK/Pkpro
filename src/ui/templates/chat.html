@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}ถามคำถาม - AI IT Technician{% endblock %}
+{% block page_title %}ถามคำถาม (Q&A){% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <!-- Chat Window -->
+    <div class="chat-box">
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                <div class="message-content">
+                    <p>สวัสดี! ฉันสามารถช่วยคุณตอบคำถาม IT ทั้งหมด</p>
+                    <p>พิมพ์คำถามของคุณและฉันจะตอบให้ 😊</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Input Area -->
+        <div class="chat-input-area">
+            <div class="input-group">
+                <textarea id="questionInput" placeholder="พิมพ์คำถามของคุณ..." rows="3"></textarea>
+                <button id="sendBtn" class="btn-send"><i class="fas fa-paper-plane"></i> ส่ง</button>
+            </div>
+            <div class="language-selector">
+                <label><input type="radio" name="language" value="th" checked> ไทย</label>
+                <label><input type="radio" name="language" value="en"> English</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Info -->
+    <aside class="chat-sidebar">
+        <div class="sidebar-section">
+            <h4>💡 คำแนะนำ</h4>
+            <div class="tips-list">
+                <div class="tip-item" onclick="setQuestion('วิธีเพิ่ม User ใน Active Directory')">
+                    <p>วิธีเพิ่ม User ใน Active Directory</p>
+                </div>
+                <div class="tip-item" onclick="setQuestion('แก้ไขปัญหา Network Connection')">
+                    <p>แก้ไขปัญหา Network Connection</p>
+                </div>
+                <div class="tip-item" onclick="setQuestion('วิธีตั้งค่า Windows Firewall')">
+                    <p>วิธีตั้งค่า Windows Firewall</p>
+                </div>
+                <div class="tip-item" onclick="setQuestion('ตรวจสอบ Disk Space ใน Server')">
+                    <p>ตรวจสอบ Disk Space ใน Server</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h4>📚 บทความยอดนิยม</h4>
+            <ul class="article-list">
+                <li><a href="#">Windows Server Best Practices</a></li>
+                <li><a href="#">Active Directory Troubleshooting</a></li>
+                <li><a href="#">Network Security Tips</a></li>
+            </ul>
+        </div>
+    </aside>
+</div>
+
+<script>
+const sendBtn = document.getElementById('sendBtn');
+const questionInput = document.getElementById('questionInput');
+const chatMessages = document.getElementById('chatMessages');
+
+sendBtn.addEventListener('click', sendMessage);
+questionInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+
+async function sendMessage() {
+    const question = questionInput.value.trim();
+    if (!question) return;
+
+    const language = document.querySelector('input[name="language"]:checked').value;
+
+    // Add user message to chat
+    addMessage(question, 'user');
+    questionInput.value = '';
+
+    // Show loading
+    addMessage('กำลังประมวลผล...', 'bot', true);
+
+    try {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                question: question,
+                language: language
+            })
+        });
+
+        const data = await response.json();
+        
+        // Remove loading message
+        const lastMessage = chatMessages.lastElementChild;
+        if (lastMessage && lastMessage.classList.contains('loading')) {
+            lastMessage.remove();
+        }
+
+        if (response.ok) {
+            addMessage(data.answer, 'bot');
+        } else {
+            addMessage('เกิดข้อผิดพลาด: ' + data.error, 'bot');
+        }
+    } catch (error) {
+        const lastMessage = chatMessages.lastElementChild;
+        if (lastMessage && lastMessage.classList.contains('loading')) {
+            lastMessage.remove();
+        }
+        addMessage('เกิดข้อผิดพลาด: ' + error.message, 'bot');
+    }
+}
+
+function addMessage(text, sender, loading = false) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}-message ${loading ? 'loading' : ''}`;
+    
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar';
+    avatar.innerHTML = sender === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
+    
+    const content = document.createElement('div');
+    content.className = 'message-content';
+    content.innerHTML = `<p>${text}</p>`;
+    
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(content);
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function setQuestion(question) {
+    questionInput.value = question;
+    questionInput.focus();
+}
+</script>
+{% endblock %}

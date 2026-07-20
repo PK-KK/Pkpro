@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI IT Technician Assistant{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-robot"></i> Pkpro</h2>
+                <p>AI IT Technician</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}"><i class="fas fa-home"></i> หน้าแรก</a></li>
+                <li><a href="#" class="nav-link {% if request.endpoint == 'chat' %}active{% endif %}"><i class="fas fa-comments"></i> ถามคำถาม</a></li>
+                <li><a href="#" class="nav-link"><i class="fas fa-file-alt"></i> วิเคราะห์ Log</a></li>
+                <li><a href="#" class="nav-link"><i class="fas fa-code"></i> สร้าง Script</a></li>
+                <li><a href="#" class="nav-link"><i class="fas fa-book"></i> Knowledge Base</a></li>
+                <li><a href="#" class="nav-link"><i class="fas fa-cog"></i> ตั้งค่า</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+                    <h1>{% block page_title %}Welcome{% endblock %}</h1>
+                </div>
+                <div class="header-right">
+                    <div class="language-selector">
+                        <button class="lang-btn" data-lang="th">ไทย</button>
+                        <button class="lang-btn" data-lang="en">English</button>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=IT+Admin" alt="User">
+                        <span>IT Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 AI IT Technician Assistant (Pkpro) | Built with ❤️ + Gemini API</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

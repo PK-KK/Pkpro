@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}AI IT Technician Assistant - Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        <div class="welcome-card">
+            <h2>🤖 ยินดีต้อนรับสู่ AI IT Technician Assistant</h2>
+            <p>ผู้ช่วยที่ช่วยคุณแก้ไขปัญหา IT ทั้งหมด</p>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+        <h3>ฟีเจอร์หลัก</h3>
+        <div class="actions-grid">
+            <div class="action-card" onclick="goToChat()">
+                <div class="action-icon"><i class="fas fa-comments"></i></div>
+                <h4>ถามคำถาม</h4>
+                <p>ถามคำถาม IT ให้ AI ตอบ</p>
+            </div>
+            <div class="action-card" onclick="goToLogAnalysis()">
+                <div class="action-icon"><i class="fas fa-file-alt"></i></div>
+                <h4>วิเคราะห์ Log</h4>
+                <p>วิเคราะห์ Error Logs</p>
+            </div>
+            <div class="action-card" onclick="goToScriptGen()">
+                <div class="action-icon"><i class="fas fa-code"></i></div>
+                <h4>สร้าง Script</h4>
+                <p>สร้าง PowerShell/Python</p>
+            </div>
+            <div class="action-card" onclick="goToKB()">
+                <div class="action-icon"><i class="fas fa-book"></i></div>
+                <h4>Knowledge Base</h4>
+                <p>ค้นหา SOP และ FAQ</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="statistics">
+        <h3>สถิติการใช้งาน</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">248</div>
+                <div class="stat-label">คำถามที่ตอบแล้ว</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">156</div>
+                <div class="stat-label">Scripts ที่สร้าง</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">89</div>
+                <div class="stat-label">ปัญหาที่แก้ไข</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">12h 45m</div>
+                <div class="stat-label">เวลาที่ประหยัด</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Activity -->
+    <section class="recent-activity">
+        <h3>กิจกรรมล่าสุด</h3>
+        <div class="activity-list">
+            <div class="activity-item">
+                <div class="activity-icon chat"><i class="fas fa-comments"></i></div>
+                <div class="activity-content">
+                    <h5>ตอบคำถาม: วิธีการเพิ่ม User ใน AD</h5>
+                    <p class="activity-time">2 ชั่วโมงที่แล้ว</p>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon script"><i class="fas fa-code"></i></div>
+                <div class="activity-content">
+                    <h5>สร้าง PowerShell Script: Check Disk Space</h5>
+                    <p class="activity-time">5 ชั่วโมงที่แล้ว</p>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon log"><i class="fas fa-file-alt"></i></div>
+                <div class="activity-content">
+                    <h5>วิเคราะห์ Event Log: Authentication Failure</h5>
+                    <p class="activity-time">1 วันที่แล้ว</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+function goToChat() {
+    // Navigate to chat page
+    alert('Chat feature coming soon!');
+}
+function goToLogAnalysis() {
+    alert('Log Analysis feature coming soon!');
+}
+function goToScriptGen() {
+    alert('Script Generator feature coming soon!');
+}
+function goToKB() {
+    alert('Knowledge Base feature coming soon!');
+}
+</script>
+{% endblock %}
