@@ -1,0 +1,36 @@
+# Core Dependencies
+Flask==3.0.0
+Flask-CORS==4.0.0
+Python-dotenv==1.0.0
+
+# AI & LLM
+google-generativeai==0.3.0
+
+# Data Processing
+pandas==2.1.3
+numpy==1.26.2
+openpyxl==3.11.0
+
+# Scripting & Automation
+pytest==7.4.3
+requests==2.31.0
+
+# Logging & Monitoring
+python-logging-loki==0.3.2
+
+# Windows/Network Tools (optional)
+pywin32==306
+netifaces==0.11.0
+scapy==2.5.0
+
+# Documentation
+Sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
+
+# Code Quality
+black==23.12.0
+flake8==6.1.0
+pylint==3.0.3
+
+# Testing
+responses==0.24.1
